@@ -6,6 +6,8 @@
 # You can you importlib.reload(map) to change the code without needing to
 # read the data every time.
 
+# pip install matplotlib geopandas PyQt6
+
 # Example:
 # $ python3
 # >>> import map
@@ -56,7 +58,7 @@ def do_stuff(df):
 
 
 def plot_use(df):
-    df.loc['RES_BUILDING_TYPE'] = df.apply(lambda row: use_category(row), axis=1)
+    df['RES_BUILDING_TYPE'] = df.apply(lambda row: use_category(row), axis=1)
 
     print("plotting data")
 
@@ -89,11 +91,11 @@ def plot_lvpa(df):
 
 def use_category(row):
 
-    code = row['DOR_CODE']
+    code = str(row['DOR_CODE'])
 
     # Exlude all codes that are either empty or don't start with 0.
     # 0 means it is residential.
-    if code is None or code == '' or code [:1] != '0':
+    if code is None or code == '' or code[0:1] != '0':
         return "Grey: Other"
 
     # Get the second number in use code. This corresponds with Building type.

@@ -1,2 +1,3 @@
 data/
 my-virtual-env/
+__pycache__/
